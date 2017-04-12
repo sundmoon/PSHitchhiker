@@ -5,10 +5,17 @@
 . './build_utils.ps1'
 
 # Synopsis: Run/Publish Tests and Fail Build on Error
-task Test BeforeTest, RunTests, ConfirmTestsPassed, AfterTest
+task Test RunTests, ConfirmTestsPassed
+
+# Synopsis: Executes before the Test Task.
+# task BeforeTest {} -Before Test {}
+
+# Synopsis: Executes after the Test Task.
+# task AfterTest {} -After Test {}
+
 
 # Synopsis: Run full Pipleline.
-task . Clean, Analyze, Test, Archive, Publish
+task . Clean, Analyze, Analyze, Test, Archive, Publish
 
 # Synopsis: Install Build Dependencies
 task InstallDependencies {
@@ -21,7 +28,8 @@ task InstallDependencies {
 }
 
 # Synopsis: Clean Artifacts Directory
-task Clean BeforeClean, {
+
+task Clean {
     if(Test-Path -Path $Artifacts)
     {
         Remove-Item "$Artifacts/*" -Recurse -Force
@@ -31,10 +39,32 @@ task Clean BeforeClean, {
 
     # Temp
     & git clone https://github.com/sundmoon/PSTestReport.git
-}, AfterClean
+}
+
+
+# Synopsis: Analyze Artifacts Directory
+task Analyze {
+    if(Test-Path -Path $Artifacts)
+    {
+        Remove-Item "$Artifacts/*" -Recurse -Force
+    }
+
+    New-Item -ItemType Directory -Path $Artifacts -Force
+
+    # Temp
+    & git clone https://github.com/sundmoon/PSTestReport.git
+}
+
+
+# Synopsis: Executes before the Analyze task.
+# task BeforeAnalyze -Before Analyze {}
+
+# Synopsis: Executes after the Analyze task.
+# task AfterAnalyze -After Analyze {}
+
 
 # Synopsis: Lint Code with PSScriptAnalyzer
-task Analyze BeforeAnalyze, {
+task Analyze {
     $scriptAnalyzerParams = @{
         Path = $ModulePath
         Severity = @('Error', 'Warning')
@@ -51,7 +81,15 @@ task Analyze BeforeAnalyze, {
         $saResults | Format-Table
         throw "One or more PSScriptAnalyzer errors/warnings where found."
     }
-}, AfterAnalyze
+}
+
+
+# Synopsis: Executes before the Analyze task.
+# task BeforeAnalyze -Before Analyze {}
+
+# Synopsis: Executes after the Analyze task.
+# task AfterAnalyze -After Analyze {}
+
 
 # Synopsis: Test the project with Pester. Publish Test and Coverage Reports
 task RunTests {
@@ -112,7 +150,7 @@ task ConfirmTestsPassed {
 }
 
 # Synopsis: Creates Archived Zip and Nuget Artifacts
-task Archive BeforeArchive, {
+task Archive {
     $moduleInfo = @{
         ModuleName = $ModuleName
         BuildNumber = $BuildNumber
@@ -133,10 +171,18 @@ task Archive BeforeArchive, {
     }
 
     Publish-NugetPackage @nuspecInfo
-}, AfterArchive
+}
+
+
+# Synopsis: Executes before the Archive task.
+# task BeforeArchive -Before Archive {}
+
+# Synopsis: Executes after the Archive task.
+# task AfterArchive -After Archive {}
+
 
 # Synopsis: Publish to SMB File Share
-task Publish BeforePublish, {
+task Publish {
     $moduleInfo = @{
         RepoName = $Settings.SMBRepoName
         RepoPath = $Settings.SMBRepoPath
@@ -146,4 +192,11 @@ task Publish BeforePublish, {
     }
 
     Publish-SMBModule @moduleInfo -Verbose
-}, AfterPublish
+}
+
+
+# Synopsis: Executes before the Publish task.
+# task BeforePublish -Before Publish {}
+
+# Synopsis: Executes after the Publish task.
+# task AfterPublish -After Publish {}

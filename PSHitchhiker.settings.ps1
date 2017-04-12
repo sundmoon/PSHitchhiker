@@ -29,7 +29,7 @@ $Settings = @{
     CIUrl = "http://jenkins/job/PSHitchhiker/"
 }
 
-###############################################################################
+<################################################################################
 # Before/After Hooks for the Core Task: Clean
 ###############################################################################
 
@@ -77,4 +77,4 @@ task AfterPublish {}
 task BeforeTest {}
 
 # Synopsis: Executes after the Test Task.
-task AfterTest {}
+task AfterTest {}#>
