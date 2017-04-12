@@ -1,6 +1,6 @@
 // Config
 class Globals {
-   static String GitRepo = 'https://github.com/Xainey/PSHitchhiker.git'
+   static String GitRepo = 'https://github.com/sundmoon/PSHitchhiker.git'
    static String ModuleName = 'PSHitchhiker'
    static String JenkinsChannel = '#jenkins-channel'
 }

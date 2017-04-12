@@ -14,18 +14,18 @@ param(
 ###############################################################################
 $Settings = @{
     SMBRepoName = 'DSCGallery'
-    SMBRepoPath = '\\Server01\Repo'
+    SMBRepoPath = '\\localhost\Repository'
 
-    Author =  "Michael Willis"
-    Owners = "Michael Willis"
-    LicenseUrl = 'https://github.com/Xainey/PSHitchhiker/LICENSE'
-    ProjectUrl = "https://github.com/Xainey/PSHitchhiker"
+    Author =  "Lev Tikhonov"
+    Owners = "Lev Tikhonov"
+    LicenseUrl = 'https://github.com/sundmoon/PSHitchhiker/LICENSE'
+    ProjectUrl = "https://github.com/sundmoon/PSHitchhiker"
     PackageDescription = "PSHitchhiker module pipeline demonstration"
-    Repository = 'https://github.com/Xainey/PSHitchhiker.git'
+    Repository = 'https://github.com/sundmoon/PSHitchhiker.git'
     Tags = ""
 
     # TODO: fix any redudant naming
-    GitRepo = "Xainey/PSHitchhiker"
+    GitRepo = "sundmoon/PSHitchhiker"
     CIUrl = "http://jenkins/job/PSHitchhiker/"
 }
 
