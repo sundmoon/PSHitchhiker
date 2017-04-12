@@ -52,7 +52,7 @@ task Analyze {
     New-Item -ItemType Directory -Path $Artifacts -Force
 
     # Temp
-    & git clone https://github.com/sundmoon/PSTestReport.git
+    & git clone https://github.com/Xainey/PSTestReport.git
 }
 
 
