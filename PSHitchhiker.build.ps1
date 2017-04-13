@@ -20,11 +20,11 @@ task . Clean, Analyze, Analyze, Test, Archive, Publish
 # Synopsis: Install Build Dependencies
 task InstallDependencies {
     # Cant run an Invoke-Build Task without Invoke-Build.
-    Install-Module -Name InvokeBuild -Force
+    Install-Module -Name InvokeBuild
 
-    Install-Module -Name DscResourceTestHelper -Force
-    Install-Module -Name Pester -Force
-    Install-Module -Name PSScriptAnalyzer -Force
+    Install-Module -Name DscResourceTestHelper
+    Install-Module -Name Pester -Force -SkipPublisherCheck
+    Install-Module -Name PSScriptAnalyzer
 }
 
 # Synopsis: Clean Artifacts Directory

@@ -26,7 +26,7 @@ $Settings = @{
 
     # TODO: fix any redudant naming
     GitRepo = "sundmoon/PSHitchhiker"
-    CIUrl = "http://jenkins/job/PSHitchhiker/"
+    CIUrl = "http://levt.theserver.tk:20080/job/PSHitchhiker/"
 }
 
 <################################################################################
