@@ -8,7 +8,7 @@ class Globals {
 // Workflow Steps
 node('master') {
   try {
-    notifyBuild('STARTED')
+    notifyBuild('BUILDSTARTED')
 
     stage('Stage 0: Clone') {
       git url: Globals.GitRepo
